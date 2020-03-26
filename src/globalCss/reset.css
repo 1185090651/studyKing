@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    outline: none;
+}
+
+html,body,#app {
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+/* 给弹出框圆角 */
+.el-dialog {
+  border-radius: 5px;
+}
+
+/* 卡片内边距 */
+.el-card__body {
+    padding: 0;
+}
+
+/* 表单取消下边距 */
+.el-dialog__body {
+    padding-bottom: 0;
+}
+
+/* 弹框确认取消交换 */
+.btn-cancel {
+    float: right;
+    margin-left: 10px;
+}
