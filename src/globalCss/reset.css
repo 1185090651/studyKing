@@ -33,3 +33,18 @@ html,body,#app {
     float: right;
     margin-left: 10px;
 }
+
+/* 重置通知消息样式 */
+.el-notification__content {
+    margin: 0;
+}
+
+.el-notification {
+    width: 250px;
+}
+
+
+.cell {
+    display: flex;
+    align-items: center;
+  }

@@ -125,6 +125,10 @@
     </el-dialog>
     <el-dialog title="找回密码" :visible.sync="isShowForgetPwd" width="30%">
       <span>未开发</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="isShowForgetPwd = false">取 消</el-button>
+    <el-button type="primary" @click="isShowForgetPwd = false">确 定</el-button>
+  </span>
     </el-dialog>
   </div>
 </template>
@@ -155,10 +159,10 @@ export default {
       isShowRegister: false,
       registerForm: {
         mobile: "",
-        captcha: "",
         name: "",
         username: "",
-        password: ""
+        password: "",
+        role: "teacher"
       },
       FormRules: {
         // 验证手机号是否合法
@@ -216,13 +220,21 @@ export default {
           this.changeCaptcha();
           return this.$message.error(res.meta.msg);
         }
-        this.$message.success(res.meta.msg);
         // 将登录成功之后的 token, 保存到客户端的 sessionStorage 中
         // 项目中除了登录之外的其他API接口，必须在登录之后才能访问
         // token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
         window.sessionStorage.setItem("token", res.data.token);
         // 将用户数据存到vuex中
+        console.log(res.data);
         this.$store.commit("saveProfile", res.data);
+        // 通知登录成功
+        this.$notify({
+          dangerouslyUseHTMLString: true,
+          message: `<div style="font-size:18px;">${res.data.user.name}ㅤ欢迎登录</div>`,
+          type: "success",
+          offset: 100,
+          position: "top-left"
+        });
         // 通过编程式导航调转到后台主页，路由地址是home
         this.$router.push("/home");
       });
@@ -241,7 +253,7 @@ export default {
       this.$refs.registerFormRef.resetFields();
     },
     next() {
-      this.active ++;
+      this.active++;
     }
   },
   created() {
